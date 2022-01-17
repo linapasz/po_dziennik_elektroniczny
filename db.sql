@@ -30,7 +30,7 @@ ALTER TABLE klasa ADD CONSTRAINT klasa_pk PRIMARY KEY ( idklasy );
 
 CREATE TABLE lekcje (
     idlekcji                INTEGER NOT NULL AUTO_INCREMENT,
-    datalekcji              DATE,
+    datalekcji              DATETIME,
     rokrealizacji           INTEGER,
     przedmioty_idprzedmiotu CHAR (15) NOT NULL,
     klasa_idklasy           CHAR(10) NOT NULL,
