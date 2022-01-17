@@ -1,0 +1,4 @@
+Projektowanie bazy danych w Oracle SQL Developer Data Modeler
+Dodanie do klasy 'Przedmioty' zmiennej 'klasa'
+Usuniêcie z klasy 'Lekcja' zmiennej 'czas trwania' jako zbêdnego elementu
+Dodanie do klas: 'Klasa', 'Wiadomosci', 'Uzytkownicy', 'Przedmioty' zmiennych okreœlaj¹cych ich ID
