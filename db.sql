@@ -12,14 +12,6 @@
 CREATE DATABASE edziennik;
 USE edziennik;
 
-CREATE TABLE dostep (
-    uzytkownicy_iduz CHAR(10) NOT NULL,
-    haslo            CHAR(25)
-   
-);
-
-ALTER TABLE dostep ADD CONSTRAINT dostep_pk PRIMARY KEY ( uzytkownicy_iduz );
-
 CREATE TABLE klasa (
     idklasy      CHAR(10) NOT NULL,
     nazwaklasy   CHAR(3),
@@ -121,11 +113,6 @@ CREATE TABLE wiadomosci (
 PRIMARY KEY ( idwiadomosci )
 );
 
-
-ALTER TABLE dostep
-    ADD CONSTRAINT dostep_uzytkownicy_fk FOREIGN KEY ( uzytkownicy_iduz )
-        REFERENCES uzytkownicy ( iduz );
-
 ALTER TABLE lekcje
     ADD CONSTRAINT lekcje_klasa_fk FOREIGN KEY ( klasa_idklasy )
         REFERENCES klasa ( idklasy );
@@ -198,18 +185,6 @@ INSERT INTO uczniowie VALUES ('uczen2', '1A21/22', false);
 INSERT INTO uczniowie VALUES ('uczen3', '1A21/22', false);
 INSERT INTO uczniowie VALUES ('uczen4', '1B21/22', false);
 INSERT INTO uczniowie VALUES ('uczen5', '1B21/22', false);
-
-
-INSERT INTO dostep VALUES ('admin1', 123);
-INSERT INTO dostep VALUES ('uczen1', 123);
-INSERT INTO dostep VALUES ('uczen2', 123);
-INSERT INTO dostep VALUES ('uczen3', 123);
-INSERT INTO dostep VALUES ('uczen4', 123);
-INSERT INTO dostep VALUES ('uczen5', 123);
-INSERT INTO dostep VALUES ('naucz1', 123);
-INSERT INTO dostep VALUES ('rodzi1', 123);
-
-
 
 
 -- Oracle SQL Developer Data Modeler Summary Report: 
