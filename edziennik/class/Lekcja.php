@@ -1,9 +1,6 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/Przedmiot.php');
-require_once(realpath(dirname(__FILE__)) . '/Obecnosc.php');
-
-use Przedmiot;
-use Obecnosc;
+//use Przedmiot;
+//use Obecnosc;
 
 /**
  * @access public
@@ -13,22 +10,15 @@ class Lekcja {
 	/**
 	 * @AttributeType string
 	 */
-	private $_tematLekcji;
+	private $tematLekcji;
 	/**
 	 * @AttributeType time_t
 	 */
-	private $_dataLekcji;
+	private $dataLekcji;
 	/**
 	 * @AttributeType time_t
 	 */
-	private $_czasTrwania;
-	/**
-	 * @AttributeType Przedmiot
-	 * /**
-	 *  * @AssociationType Przedmiot
-	 *  * /
-	 */
-	
+
 	/**
 	 * @access public
 	 */
@@ -36,7 +26,7 @@ class Lekcja {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
 	
 		$sql = "SELECT * FROM lekcje
-		WHERE idlekcji='".$_POST["idlekcji"]."'"  ;
+		WHERE idlekcji='".$_SESSION["idlekcji"]."'"  ;
 
 		if (mysqli_query($conn, $sql)) {
 			
@@ -51,8 +41,22 @@ class Lekcja {
 	/**
 	 * @access public
 	 */
-	public function wpiszTemat() {
-		// Not yet implemented
+	public function wpiszTemat($tematLekcji, $idLekcji) {
+		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
+		
+		$sql = "UPDATE lekcje  SET tematlekcji='$tematLekcji'
+		WHERE idlekcji='$idLekcji'"  ;
+
+		if (mysqli_query($conn, $sql)) {
+			echo "<script>alert('Zapisano');</script>";
+			echo "<script>window.location.href='plan_lekcji.php';</script>";
+			exit();
+		}
+		else{
+			echo "<script>alert('Niepoprawne dane');</script>";
+			echo "<script>window.location.href='editLesson.php';</script>";
+		}
+	mysqli_close($conn);
 	}
 
 	/**

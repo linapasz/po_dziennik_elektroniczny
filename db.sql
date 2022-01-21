@@ -23,9 +23,7 @@ ALTER TABLE klasa ADD CONSTRAINT klasa_pk PRIMARY KEY ( idklasy );
 CREATE TABLE lekcje (
     idlekcji                INTEGER NOT NULL AUTO_INCREMENT,
     datalekcji              DATETIME,
-    rokrealizacji           INTEGER,
     przedmioty_idprzedmiotu CHAR (15) NOT NULL,
-    klasa_idklasy           CHAR(10) NOT NULL,
 PRIMARY KEY ( idlekcji )
 );
 
@@ -113,9 +111,6 @@ CREATE TABLE wiadomosci (
 PRIMARY KEY ( idwiadomosci )
 );
 
-ALTER TABLE lekcje
-    ADD CONSTRAINT lekcje_klasa_fk FOREIGN KEY ( klasa_idklasy )
-        REFERENCES klasa ( idklasy );
 
 ALTER TABLE lekcje
     ADD CONSTRAINT lekcje_przedmioty_fk FOREIGN KEY ( przedmioty_idprzedmiotu )
@@ -172,13 +167,17 @@ INSERT INTO uzytkownicy VALUES ('uczen4', 'Katarzyna', 'Czwarta', '2004-12-01', 
 INSERT INTO uzytkownicy VALUES ('uczen5', 'Krzysztof', 'Piatek', '2005-12-01', '25959595874', 'Krasne 3A','111222333', 'uczen', 1 );
 INSERT INTO uzytkownicy VALUES ('naucz1', 'Witold', 'Witkowski', '1977-12-01', '77959595874', 'Rzeszow, ul.Okulickiego 3A','111222333', 'nauczyciel', 1 );
 INSERT INTO uzytkownicy VALUES ('rodzi1', 'Krzysztof', 'Drugi', '2056-12-01', '56959595874', 'Krasne 15','111222333', 'naucz1', 1 );
+INSERT INTO uzytkownicy VALUES ('naucz2', 'Janina', 'Kapec', '1977-12-01', '77959595874', 'Rzeszow, ul.Okulickiego 33A','111222333', 'nauczyciel', 1 );
 
 INSERT INTO rodzice VALUES ('rodzic1', 'uczen2');
+
 INSERT INTO klasa VALUES ('1B21/22', '1B', 'naucz2');
 INSERT INTO klasa VALUES ('1A21/22', '1A', 'naucz1');
 
 INSERT INTO przedmioty VALUES ('BIO1A21/22', 'Biologia 1A', '2021/2022', 'naucz1', '1A21/22');
 INSERT INTO przedmioty VALUES ('BIO1B21/22', 'Biologia 1B', '2021/2022', 'naucz1', '1B21/22');
+INSERT INTO przedmioty VALUES ('ANG1A21/22', 'Angielski', '2021/2022', 'naucz2', '1A21/22');
+INSERT INTO przedmioty VALUES ('ANG1B21/22', 'Angielski', '2021/2022', 'naucz2', '1A21/22');
 
 INSERT INTO uczniowie VALUES ('uczen1', '1A21/22', false);
 INSERT INTO uczniowie VALUES ('uczen2', '1A21/22', false);
@@ -186,6 +185,18 @@ INSERT INTO uczniowie VALUES ('uczen3', '1A21/22', false);
 INSERT INTO uczniowie VALUES ('uczen4', '1B21/22', false);
 INSERT INTO uczniowie VALUES ('uczen5', '1B21/22', false);
 
+
+INSERT INTO lekcje VALUES (1, '2022-01-15 08:00:00', 'BIO1A21/22','');
+INSERT INTO lekcje VALUES (2, '2022-01-15 08:55:00', 'BIO1B21/22','');
+INSERT INTO lekcje VALUES (3, '2022-01-15 08:00:00', 'ANG1B21/22','');
+INSERT INTO lekcje VALUES (4, '2022-01-15 08:55:00', 'ANG1A21/22','');
+
+INSERT INTO ocenyczastkowe VALUES (1, 5, 2, 'naucz1', '2022-01-15', 'uczen1');
+INSERT INTO ocenyczastkowe VALUES (2, 3, 2, 'naucz1', '2022-01-15', 'uczen2');
+INSERT INTO ocenyczastkowe VALUES (3, 5, 2, 'naucz1', '2022-01-15', 'uczen4');
+INSERT INTO ocenyczastkowe VALUES (4, 1, 1, 'naucz2', '2022-01-15', 'uczen5');
+INSERT INTO ocenyczastkowe VALUES (5, 2, 4, 'naucz2', '2022-01-15', 'uczen3');
+INSERT INTO ocenyczastkowe VALUES (6, 6, 3, 'naucz2', '2022-01-15', 'uczen4');
 
 -- Oracle SQL Developer Data Modeler Summary Report: 
 -- 
