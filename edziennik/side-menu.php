@@ -8,7 +8,7 @@
             </div>
             <ul class="nav">
                 <li class="" id="dzienniczek">
-                    <a href="index.php" class="menu-link">
+                    <a href="dzienniczek.php" class="menu-link">
                         <i class="ti-crown"></i>
                         <p>Dzienniczek</p>
                     </a>
@@ -21,14 +21,20 @@
                 </li>
                 <li id="planLekcji">
                     <a href="plan_lekcji.php" class="menu-link">
-                        <i class="ti-harddrives"></i>
+                        <i class="ti-blackboard"></i>
                         <p>Plan Lekcji</p>
                     </a>
                 </li>
 				<li id="obecnosci">
-                    <a href="attendance.php" class="menu-link">
+                    <a href="obecnosci.php" class="menu-link">
                         <i class="ti-bar-chart-alt"></i>
                         <p>Obecnosci</p>
+                    </a>
+                </li>  
+                <li id="poczta">
+                    <a href="poczta.php" class="menu-link">
+                        <i class="ti-harddrives"></i>
+                        <p>Poczta</p>
                     </a>
                 </li>  
             </ul>

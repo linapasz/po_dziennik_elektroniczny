@@ -57,7 +57,7 @@ include('inc/header.php');
 									</div>
 								</div>
 							</div>
-							<a href="grades.php">
+							<a href="dzienniczek.php">
 								<div class="footer">
 								<hr />
 								<div class="stats">
@@ -112,7 +112,7 @@ include('inc/header.php');
 									</div>
 								</div>
 							</div>
-							<a href="sections.php">
+							<a href="poczta.php">
 								<div class="footer">
 								<hr />
 								<div class="stats">
@@ -138,7 +138,7 @@ include('inc/header.php');
 									</div>
 								</div>
 							</div>
-							<a href="attendance.php">
+							<a href="obecnosci.php">
 								<div class="footer">
 								<hr />
 								<div class="stats">

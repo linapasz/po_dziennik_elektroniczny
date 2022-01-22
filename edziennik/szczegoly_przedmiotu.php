@@ -36,7 +36,7 @@ include('inc/header.php');
 	<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<a href='uzytkownicy.php'><button type="button" class="close" data-dismiss="modal">&times;</button></a>
+					<a href='plan_lekcji.php'><button type="button" class="close" data-dismiss="modal">&times;</button></a>
 					<h4 class="modal-title">Szczegoly przedmiotu</h4>
 				</div>
 				<div class="modal-body">

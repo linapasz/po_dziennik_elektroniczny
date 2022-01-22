@@ -1,12 +1,4 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/Nauczyciel.php');
-require_once(realpath(dirname(__FILE__)) . '/Uczen.php');
-require_once(realpath(dirname(__FILE__)) . '/Dzienniczek.php');
-
-use Nauczyciel;
-use Uczen;
-use Dzienniczek;
-
 /**
  * @access public
  * @author karpasz1
@@ -15,23 +7,23 @@ class Ocena extends Dzienniczek {
 	/**
 	 * @AttributeType string
 	 */
-	private $_nazwaOceny;
+	private $nazwaOceny;
 	/**
 	 * @AttributeType unsigned int
 	 */
-	private $_wartoscOceny = [1..6];
+	private $wartoscOceny;
 	/**
 	 * @AttributeType unsigned int
 	 */
-	private $_wagaOceny;
+	private $wagaOceny;
 	/**
 	 * @AttributeType string
 	 */
-	private $_nauczyciel;
+	private $nauczyciel;
 	/**
 	 * @AttributeType time_t
 	 */
-	private $_dataWpisania;
+	private $dataWpisania;
 	/**
 	 * @AttributeType Nauczyciel
 	 * /**
@@ -39,7 +31,7 @@ class Ocena extends Dzienniczek {
 	 *  * /
 	 */
 	public function wyswietlSzczegoly() {
-		// Not yet implemented
+		echo '<meta http-equiv="Refresh" content="0;url=szczegoly_oceny.php">';
 	}
 }
 ?>

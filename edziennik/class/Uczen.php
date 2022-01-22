@@ -15,15 +15,15 @@ class Uczen extends Uzytkownik {
 	/**
 	 * @AttributeType string
 	 */
-	private $_klasaUcznia;
+	private $klasaUcznia;
 	/**
 	 * @AttributeType int
 	 */
-	private $_numerWdzienniku;
+	private $numerWdzienniku;
 	/**
 	 * @AttributeType bool
 	 */
-	private $_sklasyfikowany;
+	private $sklasyfikowany;
 	/**
 	 * @AttributeType Ocena
 	 * /**

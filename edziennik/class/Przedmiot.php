@@ -1,9 +1,4 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/Klasa.php');
-require_once(realpath(dirname(__FILE__)) . '/Nauczyciel.php');
-
-use Klasa;
-use Nauczyciel;
 
 /**
  * @access public
@@ -39,7 +34,7 @@ class Przedmiot {
 	/**
 	 * @access public
 	 */
-	public function zmienProwadzocego() {
+	public function zmienProwadzacego() {
 		// Not yet implemented
 	}
 
@@ -61,7 +56,7 @@ class Przedmiot {
 	 * @access public
 	 */
 	public function wyswietlSzczegolyPrzedmiotu() {
-		// Not yet implemented
+		echo '<meta http-equiv="Refresh" content="0;url=szczegoly_przedmiotu.php">';
 	}
 }
 ?>

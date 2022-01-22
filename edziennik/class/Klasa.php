@@ -1,5 +1,5 @@
 <?php
-require_once(realpath(dirname(__FILE__)) . '/Ucze�.php');
+require_once(realpath(dirname(__FILE__)) . '/Uczen.php');
 require_once(realpath(dirname(__FILE__)) . '/Przedmiot.php');
 
 use Uczen;
@@ -13,23 +13,23 @@ class Klasa {
 	/**
 	 * @AttributeType string
 	 */
-	public $_nazwaKlasy;
+	public $nazwaKlasy;
 	/**
 	 * @AttributeType unsigned int
 	 */
-	private $_rokRozpoczecia;
+	private $rokRozpoczecia;
 	/**
 	 * @AttributeType string
 	 */
-	private $_wychowawca;
+	private $wychowawca;
 	/**
 	 * @AttributeType string[]
 	 */
-	private $_uczniowie;
+	private $uczniowie;
 	/**
 	 * @AttributeType string[]
 	 */
-	private $_przedmioty;
+	private $przedmioty;
 	/**
 	 * @AttributeType Ucze�
 	 * /**

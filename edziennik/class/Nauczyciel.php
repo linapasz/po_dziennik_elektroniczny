@@ -15,7 +15,7 @@ class Nauczyciel extends Uzytkownik {
 	/**
 	 * @AttributeType string
 	 */
-	private $_przedmiot;
+	private $przedmiot;
 	/**
 	 * @AttributeType Ocena
 	 * /**

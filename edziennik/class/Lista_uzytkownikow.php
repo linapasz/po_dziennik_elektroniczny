@@ -32,7 +32,7 @@ class Lista_uzytkownikow {
 		}
 		else{
 			echo "<script>alert('Niepoprawne dane');</script>";
-			echo "<script>window.location.href='edit.php';</script>";
+			echo "<script>window.location.href='edytuj_uzytkownika.php';</script>";
 		}
 	mysqli_close($conn);
 	}
@@ -54,7 +54,7 @@ class Lista_uzytkownikow {
 			}
 			else{
 				echo "<script>alert('Niepoprawne dane');</script>";
-				echo "<script>window.location.href='add.php';</script>";
+				echo "<script>window.location.href='dodaj_uzytkownika.php';</script>";
 			}
 		mysqli_close($conn);
 		}

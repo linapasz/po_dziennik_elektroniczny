@@ -27,19 +27,23 @@ include('inc/header.php');
 						<table>
 								<thead>
 									<tr>
-								<th><a href ="add.php"><button type="button" name="add" id="addUser" class="btn btn-success btn-xs">Dodaj uzytkownika</button></a></th>
-								<th><a href ="edit.php"><button type="button" name="edit" id="editUser" class="btn btn-success btn-xs">Edytuj uzytkownika</button></a></th>
-								<th><form action="uzytkownicy.php" method="POST"><button type="submit" name="delete" id="delete" class="btn btn-success btn-xs">
-									Usun uzytkownika</button></tr></form></th>
+									<?php if ($_SESSION['usertype']=='admin'){
+											echo '	<th><a href ="dodaj_uzytkownika.php"><button type="button" name="add" id="addUser" class="btn btn-success btn-xs">Dodaj uzytkownika</button></a></th>
+											<th><a href ="edytuj_uzytkownika.php"><button type="button" name="edit" id="editUser" class="btn btn-success btn-xs">Edytuj uzytkownika</button></a></th>
+											<th><form action="uzytkownicy.php" method="POST"><button type="submit" name="delete" id="delete" class="btn btn-success btn-xs">
+												Usun uzytkownika</button></tr></form></th>';
+									}
+									?>
+									</tr>
 								</thead>
 								</table>
 						</div>
-						<?php if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete"]))
-							   {
-								Lista_Uzytkownikow::usunUzytkownika($_SESSION["idChange"]);
-								echo '<meta http-equiv="Refresh" content="0;url=uzytkownicy.php">';
-							}
-						 ?>
+								<?php if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete"]))
+									{
+										Lista_Uzytkownikow::usunUzytkownika($_SESSION["idChange"]);
+										echo '<meta http-equiv="Refresh" content="0;url=uzytkownicy.php">';
+									}
+								?>
 					</div>
 				</div>
 
@@ -47,15 +51,14 @@ include('inc/header.php');
 					<thead>
 						<tr>
 						<thead><tr>
-		<th>ID</th>
-		<th>Imie</th>	
-		<th>Nazwisko</th>
-		<th>Typ uzytkownika</th>
-		<th>Aktywny</th>	
-		<th></th>	
-		<th></th>												
-	</tr></thead>	
-
+						<th>ID</th>
+						<th>Imie</th>	
+						<th>Nazwisko</th>
+						<th>Typ uzytkownika</th>
+						<th>Aktywny</th>	
+						<th></th>	
+						<th></th>												
+						</tr></thead>
 							<?php 
 							$user->wyswietlListeUzytkownikow();		
 							?>			

@@ -11,6 +11,6 @@ class Rodzic extends Uzytkownik {
 	/**
 	 * @AttributeType string[]
 	 */
-	private $_dzieci;
+	private $dzieci;
 }
 ?>

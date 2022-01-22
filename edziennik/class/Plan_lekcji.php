@@ -29,15 +29,49 @@ class Plan_lekcji {
 	/**
 	 * @access public
 	 */
-	public function wyswietlPlan() {
+	public function wyswietlPlan($idUz) {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
 
-		$sql = "SELECT idlekcji, datalekcji, przedmioty.nazwaprzedmiotu, przedmioty.idprzedmiotu, klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko, uzytkownicy.iduz
-		FROM lekcje 
-		INNER JOIN przedmioty ON lekcje.przedmioty_idprzedmiotu=przedmioty.idprzedmiotu
-		INNER JOIN uzytkownicy ON przedmioty.uzytkownicy_iduz = uzytkownicy.iduz
-		INNER JOIN klasa ON klasa.idklasy=przedmioty.klasa_idklasy
-		ORDER BY datalekcji ASC";
+		if ($_SESSION['usertype']=='admin'){
+			$sql = "SELECT idlekcji, datalekcji, przedmioty.nazwaprzedmiotu, klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko
+			FROM lekcje 
+			INNER JOIN przedmioty ON lekcje.przedmioty_idprzedmiotu=przedmioty.idprzedmiotu
+			INNER JOIN uzytkownicy ON przedmioty.uzytkownicy_iduz = uzytkownicy.iduz
+			INNER JOIN klasa ON klasa.idklasy=przedmioty.klasa_idklasy
+			ORDER BY datalekcji ASC";
+		}
+		else if($_SESSION['usertype']=='nauczyciel'){
+			$sql = "SELECT idlekcji, datalekcji, przedmioty.nazwaprzedmiotu,  klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko
+			FROM lekcje 
+			INNER JOIN przedmioty ON lekcje.przedmioty_idprzedmiotu=przedmioty.idprzedmiotu
+			INNER JOIN uzytkownicy ON przedmioty.uzytkownicy_iduz = uzytkownicy.iduz
+			INNER JOIN klasa ON klasa.idklasy=przedmioty.klasa_idklasy
+			WHERE przedmioty.uzytkownicy_iduz='$idUz'
+			ORDER BY datalekcji ASC";
+		}
+		else if($_SESSION['usertype']=='uczen'){
+
+			$sql = "SELECT idlekcji, datalekcji, przedmioty.nazwaprzedmiotu,  klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko
+			FROM lekcje 
+			INNER JOIN przedmioty ON lekcje.przedmioty_idprzedmiotu=przedmioty.idprzedmiotu
+			INNER JOIN uzytkownicy ON przedmioty.uzytkownicy_iduz = uzytkownicy.iduz
+			INNER JOIN klasa ON klasa.idklasy=przedmioty.klasa_idklasy
+			INNER JOIN uczniowie ON uczniowie.klasa_idklasy=przedmioty.klasa_idklasy
+			WHERE uczniowie.uzytkownicy_iduz='$idUz'
+			ORDER BY datalekcji ASC";
+		}
+		else if($_SESSION['usertype']=='rodzic') {
+			$sql = "SELECT idlekcji, datalekcji, przedmioty.nazwaprzedmiotu,  klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko
+			FROM lekcje 
+			INNER JOIN przedmioty ON lekcje.przedmioty_idprzedmiotu=przedmioty.idprzedmiotu
+			INNER JOIN uzytkownicy ON przedmioty.uzytkownicy_iduz = uzytkownicy.iduz
+			INNER JOIN klasa ON klasa.idklasy=przedmioty.klasa_idklasy
+			INNER JOIN uczniowie ON uczniowie.klasa_idklasy=przedmioty.klasa_idklasy
+			INNER JOIN rodzice ON rodzice.uzytkownicy_iduz=uczniowie.uzytkownicy_iduz
+			WHERE rodzice.idrodzica='$idUz'
+			ORDER BY datalekcji ASC";
+		}
+
 		$result = mysqli_query($conn, $sql);
 		$records = mysqli_num_rows($result);
 	
@@ -52,7 +86,7 @@ class Plan_lekcji {
 				echo "<th>" . $row['imie'] . ' ' . $row['nazwisko'] ;
 				echo "</th>";
 				echo '<th>
-				<form action="plan_lekcji.php" method="post">
+				<form method="post">
 				<button type="submit" name="'.$row["idlekcji"].'" class="btn btn-success btn-xs">Wybierz</button>
 				</form></th>';
 				if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST[$row["idlekcji"]])){				
@@ -70,7 +104,7 @@ class Plan_lekcji {
 	public function dodajLekcje($dataLekcji,$idPrzedmiotu) {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
 	
-		$sql = "INSERT INTO lekcje (VALUES ( '$dataLekcji', '$idPrzedmiotu')" ;
+		$sql = "INSERT INTO lekcje VALUES ( '$dataLekcji', '$idPrzedmiotu')" ;
 
 		if (mysqli_query($conn, $sql)) {
 			echo "<script>alert('Dodano');</script>";

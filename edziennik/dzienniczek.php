@@ -1,7 +1,11 @@
 <?php 
 include('class/School.php');
+include('class/Dzienniczek.php');
+include('class/Ocena.php');
 $school = new School();
 $school->loginStatus();
+$ocena = new Ocena();
+$dzienniczek = new Dzienniczek();
 include('inc/header.php');
 ?>
 <title>eDziennik</title>
@@ -23,21 +27,49 @@ include('inc/header.php');
 						<div class="col-md-10">
 							<h3 class="panel-title"></h3>
 						</div>
-						<div class="col-md-2" align="right">
-							<button type="button" name="add" id="addSubject" class="btn btn-success btn-xs">Dodaj ocene</button>
+						<div>
+						<table>
+						<thead>
+						
+							<tr>
+							<?php if($_SESSION['usertype']=='nauczyciel'||$_SESSION['usertype']=='admin'){
+							echo '	<th><a href ="dodaj_ocene.php"><button type="button" name="add" id="dodaj" class="btn btn-success btn-xs">Dodaj ocene</button></a></th>
+							<th><form action="dzienniczek.php" method="POST"><button type="submit" name="delete" id="delete" class="btn btn-success btn-xs">	Usun ocene</button></th></form>
+							<th><a href ="edytuj_ocene.php"><button type="button" name="edit" id="editLesson" class="btn btn-success btn-xs">Edytuj ocene</button></a></th>';
+							} ?>
+							<th><form action="szczegoly_oceny.php" method="POST"><button type="submit" name="szczegoly" id="szczegoly" class="btn btn-success btn-xs">Szczegoly oceny</button></form></th>
+							</tr>
+						</table>
+						</thead>
 						</div>
 					</div>
 				</div>
+				<?php 		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete"]))
+							   {
+
+								$dzienniczek->usunOcene($_SESSION["idOceny"]);
+								}
+								if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["dodaj"]))
+							   {
+								$dzienniczek->dodajOcene($_SESSION["idOceny"]);
+								}
+								if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["szczegoly"]))
+							   {
+								$ocena->wyswietlSzczegoly();
+								}
+						 ?>
 				<table id="subjectList" class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th>Wartosc</th>
-							<th>Przedmiot</th>	
+							<th>Id ucznia</th>
+							<th>Uczen</th>
+							<th>Id nauczyciela</th>	
 							<th>Data</th>							
-							<th></th>
 							<th></th>							
 						</tr>
 					</thead>
+					<?php $dzienniczek->wyswietlOceny(); ?>
 				</table>
 				
 			</div>			

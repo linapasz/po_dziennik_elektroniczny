@@ -13,35 +13,35 @@ class Uzytkownik {
 	/**
 	 * @AttributeType string
 	 */
-	public $_imie;
+	public $imie;
 	/**
 	 * @AttributeType string
 	 */
-	public $_nazwisko;
+	public $nazwisko;
 	/**
 	 * @AttributeType time_t
 	 */
-	public $_dataUrodzenia;
+	public $dataUrodzenia;
 	/**
 	 * @AttributeType long int
 	 */
-	public $_pesel;
+	public $pesel;
 	/**
 	 * @AttributeType string
 	 */
-	public $_miejsceZamieszkania;
+	public $miejsceZamieszkania;
 	/**
 	 * @AttributeType long int
 	 */
-	public $_telefonKontaktowy;
+	public $telefonKontaktowy;
 	/**
 	 * @AttributeType string
 	 */
-	public $_typUzytkownika;
+	public $typUzytkownika;
 	/**
 	 * @AttributeType bool
 	 */
-	public $_aktywny;
+	public $aktywny;
 	/**
 	 * @AttributeType Lista uzytkownikow
 	 * /**

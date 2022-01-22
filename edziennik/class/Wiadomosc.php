@@ -1,8 +1,6 @@
 <?php
 require_once(realpath(dirname(__FILE__)) . '/Skrzynka_odbiorcza.php');
 
-use Skrzynka_odbiorcza;
-
 /**
  * @access public
  * @author karpasz1
@@ -37,29 +35,23 @@ class Wiadomosc {
 	/**
 	 * @access public
 	 */
-	public function wyslij() {
-		// Not yet implemented
+	public function wyslij($temat,$idNadawcy,$dataWyslania,$tresc,$idOdbiorcy) {
+		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
+	
+		$sql = "INSERT INTO wiadomosci ( temat, idnadawcy, datawyslania, tresc, uzytkownicy_iduz) 
+		VALUES ('$temat','$idNadawcy','$dataWyslania','$tresc','$idOdbiorcy')";
+
+		if (mysqli_query($conn, $sql)) {
+			echo "<script>alert('Wyslano');</script>";
+			echo "<script>window.location.href='poczta.php';</script>";
+			exit();
+		}
+		else{
+			echo "<script>alert('Niepoprawne dane');</script>";
+			echo "<script>window.location.href='poczta.php';</script>";
+		}
+	mysqli_close($conn);
 	}
 
-	/**
-	 * @access public
-	 */
-	public function anuluj() {
-		// Not yet implemented
-	}
-
-	/**
-	 * @access public
-	 */
-	public function podajTresc() {
-		// Not yet implemented
-	}
-
-	/**
-	 * @access public
-	 */
-	public function dodajOdbiorce() {
-		// Not yet implemented
-	}
 }
 ?>

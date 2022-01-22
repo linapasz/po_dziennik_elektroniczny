@@ -1,4 +1,5 @@
 Projektowanie bazy danych w Oracle SQL Developer Data Modeler
-Dodanie do klasy 'Przedmioty' zmiennej 'klasa'
+Dodanie do klasy 'Przedmioty' zmiennej 'klasa' a usuniêcie 'uczniowie'.
+Usuniêcie metod dodajUcznia() i usunUcznia()
 Usuniêcie z klasy 'Lekcja' zmiennej 'czas trwania' jako zbêdnego elementu
-Dodanie do klas: 'Klasa', 'Wiadomosci', 'Uzytkownicy', 'Przedmioty' zmiennych okreœlaj¹cych ich ID
+Usuniêcie znajdzuzytkownika() z Lista_uzytkownikow, poniewa¿ okaza³a siê zbêdna

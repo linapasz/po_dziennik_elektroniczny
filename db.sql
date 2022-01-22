@@ -33,6 +33,7 @@ CREATE TABLE obecnosci (
     idobecnosci                INTEGER NOT NULL AUTO_INCREMENT,
     lekcje_idlekcji            INTEGER,
     uczniowie_uzytkownicy_iduz CHAR(10),
+    obecnosc INT,
 PRIMARY KEY ( idobecnosci )
 );
 
@@ -41,7 +42,7 @@ CREATE TABLE ocenyczastkowe (
     idoceny        INTEGER NOT NULL AUTO_INCREMENT,
     wartoscoceny   INTEGER,
     wagaoceny      INTEGER,
-    idnauczyciela  INTEGER,
+    idnauczyciela  CHAR(10),
     datawpisania   DATE,
     uczniowie_iduz CHAR(10) NOT NULL,
 PRIMARY KEY ( idoceny )
@@ -50,7 +51,7 @@ PRIMARY KEY ( idoceny )
 
 CREATE TABLE ocenykoncowe (
     idoceny                   INTEGER NOT NULL AUTO_INCREMENT,
-    uczniowie_uzytkownicy_iduz CHAR(10) NOT NULL,
+    uczniowie_iduz CHAR(10) NOT NULL,
     ocenakoncowa               INTEGER,
     idprzedmiotu              CHAR(15),
 PRIMARY KEY ( idoceny )
@@ -104,7 +105,7 @@ ALTER TABLE uzytkownicy ADD CONSTRAINT uzytkownicy_pk PRIMARY KEY ( iduz );
 CREATE TABLE wiadomosci (
     idwiadomosci     INTEGER NOT NULL AUTO_INCREMENT,
     temat            CHAR(30),
-    idnadawcy        CHAR,
+    idnadawcy        CHAR(10),
     datawyslania     DATE,
     tresc            VARCHAR(4000),
     uzytkownicy_iduz CHAR(10) NOT NULL,
@@ -123,14 +124,6 @@ ALTER TABLE obecnosci
 
 ALTER TABLE obecnosci
     ADD CONSTRAINT obecnosci_uczniowie_fk FOREIGN KEY ( uczniowie_uzytkownicy_iduz )
-        REFERENCES uczniowie ( uzytkownicy_iduz );
-
-ALTER TABLE ocenyczastkowe
-    ADD CONSTRAINT ocenyczastkowe_uczniowie_fk FOREIGN KEY ( uczniowie_iduz )
-        REFERENCES uczniowie ( uzytkownicy_iduz );
-
-ALTER TABLE ocenykoncowe
-    ADD CONSTRAINT ocenykoncowe_uczniowie_fk FOREIGN KEY ( uczniowie_uzytkownicy_iduz )
         REFERENCES uczniowie ( uzytkownicy_iduz );
 
 ALTER TABLE przedmioty
