@@ -3,3 +3,27 @@ Dodanie do klasy 'Przedmioty' zmiennej 'klasa' a usuniêcie 'uczniowie'.
 Usuniêcie metod dodajUcznia() i usunUcznia()
 Usuniêcie z klasy 'Lekcja' zmiennej 'czas trwania' jako zbêdnego elementu
 Usuniêcie znajdzuzytkownika() z Lista_uzytkownikow, poniewa¿ okaza³a siê zbêdna
+
+Z klasy wiadomosc usun¹æ anuluj(), dodajodbiorce(), podajtresc(), bo przy naszej implementacji s¹ to funkcje zbêdne.
+Z klady Przedmiot usunac dodajUcznia(), usunUcznia(), poniewa¿ podczas etapu projektowania przeoczyliœmy fakt, ¿e s¹ to funkcje zbêdne, poniewa¿ do przedmiotu dopisywana jest klasa, a nie pojedyñczy uczniowie.
+
+Zostalo do zaimplementowania (izi, zrobiê w wolnej chwili):
+Uczen::zmienKlase();
+Przedmiot::zmienProwadzacego()
+
+Trzeba kod ogarn¹æ, ¿eby mia³ rêce i nogi - czyli jednakowe wciêcia i w ogóle, bo ja jak siedzia³am po nocy, to by³o mi ju¿ wszystko jedno jak to wygl¹da xD
+
+Nazewnictwo jest w miarê jednolite:
+- zmienne/pliki wszystko po polsku
+- pliki z klasami Nazwa_dluga.php
+- pliki inne nazwa_dluga.php
+- zmienne $zmiennaPierwsza
+- klasy Duza_litera
+
+Dziêki takiemu oznaczeniu wiadomo co jest czym na pierwszy rzut oka. 
+
+Dokumentacja:
+powrzucamy du¿o komentarzy do kodu i bêdzie git - do tych oczywistych mo¿esz ty, resztê ja podpiszê
+Poza tym to nie wiem co siê pisze w dokumentacji. Powierzam to Tobie xD
+
+GITHUB - zrób jakiegoœ brancha, pozmieniaj coœ w kodzie i podosy³aj, ¿eby by³o, ¿e u¿ywaliœmy tego gitaXD
