@@ -1,11 +1,11 @@
 Projektowanie bazy danych w Oracle SQL Developer Data Modeler
-Dodanie do klasy 'Przedmioty' zmiennej 'klasa' a usunięcie 'uczniowie'. //tutaj czy w UML?
-Usunięcie metod dodajUcznia() i usunUcznia()  //tutaj czy w UML?
-Usunięcie z klasy 'Lekcja' zmiennej 'czas trwania' jako zbędnego elementu //tutaj czy w UML?
-Usunięcie znajdzuzytkownika() z Lista_uzytkownikow, ponieważ okazała się zbędna //tutaj czy w UML?
+Dodanie do klasy 'Przedmioty' zmiennej 'klasa' a usunięcie 'uczniowie'.
+Usunięcie metod dodajUcznia() i usunUcznia()
+Usunięcie z klasy 'Lekcja' zmiennej 'czas trwania' jako zbędnego elementu
+Usunięcie znajdzuzytkownika() z Lista_uzytkownikow, ponieważ okazała się zbędna 
 
-Z klasy wiadomosc usunąć anuluj(), dodajodbiorce(), podajtresc(), bo przy naszej implementacji są to funkcje zbędne.  //tutaj czy w UML?
-Z klady Przedmiot usunac dodajUcznia(), usunUcznia(), ponieważ podczas etapu projektowania przeoczyliśmy fakt, że są to funkcje zbędne, ponieważ do przedmiotu dopisywana jest klasa, a nie pojedyńczy uczniowie. //tutaj czy w UML?
+Z klasy wiadomosc usunąć anuluj(), dodajodbiorce(), podajtresc(), bo przy naszej implementacji są to funkcje zbędne.
+Z klady Przedmiot usunac dodajUcznia(), usunUcznia(), ponieważ podczas etapu projektowania przeoczyliśmy fakt, że są to funkcje zbędne, ponieważ do przedmiotu dopisywana jest klasa, a nie pojedyńczy uczniowie.
 
 Zostalo do zaimplementowania (izi, zrobię w wolnej chwili):
 Uczen::zmienKlase();    //zrobione
