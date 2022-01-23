@@ -1,29 +1,29 @@
 Projektowanie bazy danych w Oracle SQL Developer Data Modeler
-Dodanie do klasy 'Przedmioty' zmiennej 'klasa' a usuniêcie 'uczniowie'.
-Usuniêcie metod dodajUcznia() i usunUcznia()
-Usuniêcie z klasy 'Lekcja' zmiennej 'czas trwania' jako zbêdnego elementu
-Usuniêcie znajdzuzytkownika() z Lista_uzytkownikow, poniewa¿ okaza³a siê zbêdna
+Dodanie do klasy 'Przedmioty' zmiennej 'klasa' a usuniÄ™cie 'uczniowie'.
+UsuniÄ™cie metod dodajUcznia() i usunUcznia()
+UsuniÄ™cie z klasy 'Lekcja' zmiennej 'czas trwania' jako zbÄ™dnego elementu
+UsuniÄ™cie znajdzuzytkownika() z Lista_uzytkownikow, poniewaÅ¼ okazaÅ‚a siÄ™ zbÄ™dna 
 
-Z klasy wiadomosc usun¹æ anuluj(), dodajodbiorce(), podajtresc(), bo przy naszej implementacji s¹ to funkcje zbêdne.
-Z klady Przedmiot usunac dodajUcznia(), usunUcznia(), poniewa¿ podczas etapu projektowania przeoczyliœmy fakt, ¿e s¹ to funkcje zbêdne, poniewa¿ do przedmiotu dopisywana jest klasa, a nie pojedyñczy uczniowie.
+Z klasy wiadomosc usunÄ…Ä‡ anuluj(), dodajodbiorce(), podajtresc(), bo przy naszej implementacji sÄ… to funkcje zbÄ™dne.
+Z klady Przedmiot usunac dodajUcznia(), usunUcznia(), poniewaÅ¼ podczas etapu projektowania przeoczyliÅ›my fakt, Å¼e sÄ… to funkcje zbÄ™dne, poniewaÅ¼ do przedmiotu dopisywana jest klasa, a nie pojedyÅ„czy uczniowie.
 
-Zostalo do zaimplementowania (izi, zrobiê w wolnej chwili):
-Uczen::zmienKlase();
-Przedmiot::zmienProwadzacego()
+Zostalo do zaimplementowania (izi, zrobiÄ™ w wolnej chwili):
+Uczen::zmienKlase();    //zrobione
+Przedmiot::zmienProwadzacego()  //zrobione
 
-Trzeba kod ogarn¹æ, ¿eby mia³ rêce i nogi - czyli jednakowe wciêcia i w ogóle, bo ja jak siedzia³am po nocy, to by³o mi ju¿ wszystko jedno jak to wygl¹da xD
+Trzeba kod ogarnÄ…Ä‡, Å¼eby miaÅ‚ rÄ™ce i nogi - czyli jednakowe wciÄ™cia i w ogÃ³le, bo ja jak siedziaÅ‚am po nocy, to byÅ‚o mi juÅ¼ wszystko jedno jak to wyglÄ…da xD
 
-Nazewnictwo jest w miarê jednolite:
+Nazewnictwo jest w miarÄ™ jednolite:
 - zmienne/pliki wszystko po polsku
 - pliki z klasami Nazwa_dluga.php
 - pliki inne nazwa_dluga.php
 - zmienne $zmiennaPierwsza
 - klasy Duza_litera
 
-Dziêki takiemu oznaczeniu wiadomo co jest czym na pierwszy rzut oka. 
+DziÄ™ki takiemu oznaczeniu wiadomo co jest czym na pierwszy rzut oka. 
 
 Dokumentacja:
-powrzucamy du¿o komentarzy do kodu i bêdzie git - do tych oczywistych mo¿esz ty, resztê ja podpiszê
-Poza tym to nie wiem co siê pisze w dokumentacji. Powierzam to Tobie xD
+powrzucamy duÅ¼o komentarzy do kodu i bÄ™dzie git - do tych oczywistych moÅ¼esz ty, resztÄ™ ja podpiszÄ™
+Poza tym to nie wiem co siÄ™ pisze w dokumentacji. Powierzam to Tobie xD
 
-GITHUB - zrób jakiegoœ brancha, pozmieniaj coœ w kodzie i podosy³aj, ¿eby by³o, ¿e u¿ywaliœmy tego gitaXD
+GITHUB - zrÃ³b jakiegoÅ› brancha, pozmieniaj coÅ› w kodzie i podosyÅ‚aj, Å¼eby byÅ‚o, Å¼e uÅ¼ywaliÅ›my tego gitaXD
