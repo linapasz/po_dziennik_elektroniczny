@@ -1,16 +1,17 @@
 <?php
 session_start();
 require('config.php');
+//klasa do logowania
 class School extends Dbconfig {	
     protected $hostName;
     protected $connectionName;
     protected $password;
 	protected $dbName;
-	private $connectionTable = 'dostep'; //user
+	private $connectionTable = 'dostep'; 
 	private $studentTable = 'uczniowie'; 
 	private $classesTable = 'lekcje';
 	private $sectionsTable = 'klasy';
-	private $userTable = 'uzytkownicy'; //teacher
+	private $userTable = 'uzytkownicy'; 
 	private $subjectsTable = 'przedmioty';
 	private $attendanceTable = 'obecnosci';
 	private $gradesTable = 'ocenyczastkowe';
@@ -34,20 +35,6 @@ class School extends Dbconfig {
             }
         }
     }
-	public static function getData($sqlQuery) {
-		$result = mysqli_query($this->dbConnect, $sqlQuery);
-		if(!$result){
-			die('Error in query: '. mysqli_error());
-		}
-		$data= array();
-		while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-			$data[]=$row;            
-		}
-		return $data;
-	}
-	public function showData($result){
-
-	}
 	private function getNumRows($sqlQuery) {
 		$result = mysqli_query($this->dbConnect, $sqlQuery);
 		if(!$result){
@@ -70,9 +57,8 @@ class School extends Dbconfig {
 	}
 	public function login(){		
 		$errorMessage = '';
-		if(!empty($_POST["login"]) && $_POST["id"]!=''&& $_POST["haslo"]!='') {	
+		if(!empty($_POST["login"]) && $_POST["id"]!='') {	
 			$id = $_POST["id"];
-			$haslo = $_POST["login"];
 			$sqlQuery = "SELECT * FROM ".$this->userTable." 
 				WHERE iduz='".$id."'";
 			$resultSet = mysqli_query($this->dbConnect, $sqlQuery) or die("error".mysql_error());
@@ -85,8 +71,6 @@ class School extends Dbconfig {
 			} else {		
 				$errorMessage = "Invalid login!";		 
 			}
-		} else if(!empty($_POST["login"])){
-			$errorMessage = "Enter Both connection and password!";	
 		}
 		return $errorMessage; 		
 	}	

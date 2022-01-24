@@ -2,7 +2,7 @@
 include('class/Plan_lekcji.php');
 include('class/Lekcja.php');
 include('class/School.php');
-
+//laczenie z baza
 $idLekcji = $_SESSION["idChange"];
 $sql = "SELECT datalekcji, przedmioty.nazwaprzedmiotu, przedmioty.idprzedmiotu, klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko, uzytkownicy.iduz, tematlekcji
 FROM lekcje 
@@ -14,6 +14,7 @@ $conn = mysqli_connect('localhost', 'root','', 'edziennik');
 $result = mysqli_query($conn, $sql);
 $records = mysqli_num_rows($result);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+//wyluskanie danych z bazu
 $tematLekcji = $row['tematlekcji'];
 $dataLekcji=  $row['datalekcji'];
 $idPrzedmiotu= $row['idprzedmiotu'];
@@ -25,6 +26,7 @@ $school = new School();
 $school->loginStatus();
 $plan = new Plan_Lekcji();
 $lekcja = new Lekcja();
+
 include('inc/header.php');
 ?>
 <title>eDziennik</title>

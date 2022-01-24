@@ -1,15 +1,18 @@
 <?php 
 include('class/Skrzynka_odbiorcza.php');
 include('class/School.php');
+
 $skrzynka = new Skrzynka_odbiorcza();
 $school = new School();
 $school->loginStatus();
 $idWiadomosci=$_SESSION["idWiadomosci"];
+//polaczenie z baza
 $sql = "SELECT temat, idnadawcy, datawyslania, tresc, uzytkownicy_iduz FROM wiadomosci WHERE idwiadomosci='$idWiadomosci'";
 $conn = mysqli_connect('localhost', 'root','', 'edziennik');
 $result = mysqli_query($conn, $sql);
 $records = mysqli_num_rows($result);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
 $temat=$row['temat'];
 $idNadawcy=$row['idnadawcy'];
 $dataWyslania=$row['datawyslania'];

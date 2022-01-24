@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @access public
  * @author karpasz1
@@ -12,7 +11,7 @@ class Dzienniczek {
 	/**
 	 * @AttributeType string
 	 */
-	private $_czen;
+	private $uczen;
 	/**
 	 * @AttributeType unsigned int
 	 */
@@ -21,11 +20,14 @@ class Dzienniczek {
 	/**
 	 * @access public
 	 */
+
+	 //wpisanie oceny do dziennika
 	public function wpiszOcene( $wartoscOceny, $wagaOceny, $idNauczyciela, $dataWpisania, $idUcznia) {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
 	
 		$sql = "INSERT INTO ocenyczastkowe (wartoscoceny, wagaoceny, idnauczyciela, datawpisania, uczniowie_iduz) VALUES ('$wartoscOceny', '$wagaOceny', '$idNauczyciela', '$dataWpisania', '$idUcznia')" ;
 
+		//jesli dodano
 		if (mysqli_query($conn, $sql)) {
 			echo "<script>alert('Dodano');</script>";
 			echo "<script>window.location.href='dzienniczek.php';</script>";
@@ -42,6 +44,7 @@ class Dzienniczek {
 	/**
 	 * @access public
 	 */
+	//usuniecie oceny z bazy
 	public function usunOcene($idOceny) {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
 		$sql = "DELETE FROM ocenyczastkowe WHERE idoceny='$idOceny'" ; 
@@ -82,12 +85,15 @@ class Dzienniczek {
 	public function wyswietlOceny() {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
 
+		//w zaleznosci od typu uzytkownika wyswietlane sa rozne zestawy ocen
+		//admin - wszystkie
 		if ($_SESSION['usertype']=='admin'){
 			$sql = "SELECT ocenyczastkowe.idoceny, ocenyczastkowe.wartoscoceny, ocenyczastkowe.wagaoceny, ocenyczastkowe.datawpisania, ocenyczastkowe.idnauczyciela, uzytkownicy.imie, uzytkownicy.nazwisko, uzytkownicy.iduz
 			FROM ocenyczastkowe
 			INNER JOIN uzytkownicy ON uzytkownicy.iduz=ocenyczastkowe.uczniowie_iduz
 			ORDER BY ocenyczastkowe.datawpisania ASC";
 		}
+		//nauczyciel - oceny wpisane przez tego nauczyciela
 		else if($_SESSION['usertype']=='nauczyciel'){
 			$sql = "SELECT ocenyczastkowe.idoceny, ocenyczastkowe.wartoscoceny, ocenyczastkowe.wagaoceny, ocenyczastkowe.datawpisania,ocenyczastkowe.idnauczyciela, klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko, uzytkownicy.iduz
 			FROM ocenyczastkowe
@@ -96,6 +102,7 @@ class Dzienniczek {
 			INNER JOIN klasa ON klasa.idklasy=przedmioty.klasa_idklasy
 			WHERE ocenyczastkowe.idnauczyciela='".$_SESSION["userid"]."'";
 		}
+		//uczen - jego oceny
 		else if($_SESSION['usertype']=='uczen'){
 			$sql = "SELECT ocenyczastkowe.idoceny, ocenyczastkowe.wartoscoceny, ocenyczastkowe.wagaoceny, ocenyczastkowe.datawpisania,ocenyczastkowe.idnauczyciela, klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko, uzytkownicy.iduz
 			FROM ocenyczastkowe
@@ -104,6 +111,7 @@ class Dzienniczek {
 			INNER JOIN klasa ON klasa.idklasy=przedmioty.klasa_idklasy
 			WHERE ocenyczastkowe.uczniowie_iduz='".$_SESSION["userid"]."'";
 		}
+		//rodzic - oceny dziecka
 		else if($_SESSION['usertype']=='rodzic') {
 			$sql = "SELECT ocenyczastkowe.idoceny, ocenyczastkowe.wartoscoceny, ocenyczastkowe.wagaoceny, ocenyczastkowe.datawpisania, ocenyczastkowe.idnauczyciela,klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko, uzytkownicy.iduz
 			FROM ocenyczastkowe
@@ -131,9 +139,10 @@ class Dzienniczek {
 				<form action="dzienniczek.php" method="post">
 				<button type="submit" name="'.$row["idoceny"].'" class="btn btn-success btn-xs">Wybierz</button>
 				</form></th>';
+
+				//w przypadku wybrania oceny ustawienie wartosci $_SESSION w celu zachowania idoceny
 				if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST[$row["idoceny"]])){				
 					$_SESSION["idOceny"] = $row["idoceny"];
-					//echo '<meta http-equiv="Refresh" content="0;url=uzytkownicy.php">';
 				}
 				echo "</tr>";
 			}

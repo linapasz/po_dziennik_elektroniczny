@@ -6,15 +6,11 @@ include('Wiadomosc.php');
  */
 class Skrzynka_odbiorcza {
 	/**
-	 * @AttributeType Wiadomo��
+	 * @AttributeType Wiadomosc
 	 * /**
-	 *  * @AssociationType Wiadomo��
+	 *  * @AssociationType Wiadomosc
 	 *  * /
 	 */
-	public function nowaWiadomosc($temat,$idNadawcy,$dataWyslania,$tresc,$idOdbiorcy) {	
-			$wiadomosc = new Wiadomosc();
-			$wiadomosc->wyslij($temat,$idNadawcy,$dataWyslania,$tresc,$idOdbiorcy);
-	}
 
 	/**
 	 * @access public
@@ -35,6 +31,11 @@ class Skrzynka_odbiorcza {
 	 * @access public
 	 */
 	public function wyswietlWiadomosc() {
+		//sprawdzenie istnienia wiadomosci, jesli istnieje - wyswietl
+		if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST[$row["idwiadomosci"]])){	
+			$_SESSION["idWiadomosci"] = $row["idwiadomosci"];
+		}
+		//przejscie do formularza wyswietlajacego
 		echo '<meta http-equiv="Refresh" content="0;url=wiadomosc.php">';
 	}
 
@@ -61,13 +62,18 @@ class Skrzynka_odbiorcza {
 				<button type="submit" name="'.$row["idwiadomosci"].'" class="btn btn-success btn-xs">Wyswietl</button>
 				</form></th>';
 				if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST[$row["idwiadomosci"]])){
-					
 					$_SESSION["idWiadomosci"] = $row["idwiadomosci"];
 					Skrzynka_odbiorcza::wyswietlWiadomosc();
 				}
 				echo "</tr>";
 			}
 	}
+	}
+
+	public function nowaWiadomosc($temat,$idNadawcy,$dataWyslania,$tresc,$idOdbiorcy) {	
+		$wiadomosc = new Wiadomosc();
+		$wiadomosc->wyslij($temat,$idNadawcy,$dataWyslania,$tresc,$idOdbiorcy);
 }
+
 }
 ?>

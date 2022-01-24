@@ -2,18 +2,20 @@
 include('class/Lista_uzytkownikow.php');
 include('class/School.php');
 $newUser = new Uzytkownik();
-$_iduz='';
-$_imie = '';
-$_nazwisko= '';
-$_dataUrodzenia= '';
-$_pesel= '';
-$_miejsceZamieszkania= '';
-$_telefonKontaktowy= '';
-$_typUzytkownika= '';
-$_aktywny= '';
+//zainicjowanie zmiennych
+$iduz='';
+$imie = '';
+$nazwisko= '';
+$dataUrodzenia= '';
+$pesel= '';
+$miejsceZamieszkania= '';
+$telefonKontaktowy= '';
+$typUzytkownika= '';
+$aktywny= '';
 $school = new School();
 $school->loginStatus();
 $user = new Lista_uzytkownikow();
+
 include('inc/header.php');
 ?>
 <title>eDziennik</title>
@@ -32,19 +34,19 @@ include('inc/header.php');
 				<div class="modal-body">
 				<div class="form-group">
 						<label for="firstname" class="control-label">Id</label>
-						<input type="text" class="form-control" id="iduz" name="iduz" placeholder="Id" value="<?=$_iduz; ?>" required>			
+						<input type="text" class="form-control" id="iduz" name="iduz" placeholder="Id" value="<?=$iduz; ?>" required>			
 					</div>	
 					<div class="form-group">
 						<label for="firstname" class="control-label">Imie</label>
-						<input type="text" class="form-control" id="imie" name="imie" placeholder="Imie" value="<?= $_imie; ?>" required>		
+						<input type="text" class="form-control" id="imie" name="imie" placeholder="Imie" value="<?= $imie; ?>" required>		
 					</div>	
 					<div class="form-group">
 						<label for="firstname" class="control-label">Nazwisko</label>
-						<input type="text" class="form-control" id="nazwisko" name="nazwisko" placeholder="Nazwisko" value="<?= $_nazwisko; ?>"required>				
+						<input type="text" class="form-control" id="nazwisko" name="nazwisko" placeholder="Nazwisko" value="<?= $nazwisko; ?>"required>				
 					</div>	
 					<div class="form-group">
 						<label for="mname" class="control-label">Aktywnosc</label>	
-						<select name="aktywny" id="aktywny" class="form-control"  value="<?= $_aktywny; ?>"required>
+						<select name="aktywny" id="aktywny" class="form-control"  value="<?= $aktywny; ?>"required>
 							<option value="">Wybierz</option>
 							<option value="1">aktywny</option>
 							<option value="0">nieaktywny</option>
@@ -53,23 +55,23 @@ include('inc/header.php');
 					</div>
 					<div class="form-group">
 						<label for="email" class="control-label">Data urodzenia</label>							
-						<input type="text" class="form-control"  id="dataUrodzenia" name="dataUrodzenia" placeholder="yyyy-mm-dd" value="<?= $_dataUrodzenia; ?>">					
+						<input type="text" class="form-control"  id="dataUrodzenia" name="dataUrodzenia" placeholder="yyyy-mm-dd" value="<?= $dataUrodzenia; ?>">					
 					</div>	
 					<div class="form-group">
 						<label for="email" class="control-label">Pesel</label>							
-						<input type="text" class="form-control"  id="pesel" name="pesel" placeholder="Pesel" value="<?= $_pesel; ?>">							
+						<input type="text" class="form-control"  id="pesel" name="pesel" placeholder="Pesel" value="<?= $pesel; ?>">							
 					</div>	
 					<div class="form-group">
 						<label for="mobile" class="control-label">Telefon</label>							
-						<input type="text" class="form-control" id="telefonKontaktowy" name="telefonKontaktowy" placeholder="telefonKontaktowy" value="<?= $_telefonKontaktowy; ?>">						
+						<input type="text" class="form-control" id="telefonKontaktowy" name="telefonKontaktowy" placeholder="telefonKontaktowy" value="<?= $telefonKontaktowy; ?>">						
 					</div>		
 					<div class="form-group">
 						<label for="address" class="control-label">Adres</label>							
-						<input type="text" class="form-control" id="miejsceZamieszkania" name="miejsceZamieszkania" placeholder="miejsceZamieszkania" value="<?= $_miejsceZamieszkania; ?>">							
+						<input type="text" class="form-control" id="miejsceZamieszkania" name="miejsceZamieszkania" placeholder="miejsceZamieszkania" value="<?= $miejsceZamieszkania; ?>">							
 					</div>
 					<div class="form-group">
 						<label for="mname" class="control-label">Typ uzytkownika</label>	
-						<select name="typUzytkownika" id="typUzytkownika" class="form-control"  value="<?= $_typUzytkownika; ?>"required>
+						<select name="typUzytkownika" id="typUzytkownika" class="form-control"  value="<?= $typUzytkownika; ?>"required>
 							<option value="">Wybierz</option>
 							<option value="admin">administrator</option>
 							<option value="nauczyciel">nauczyciel</option>
@@ -85,16 +87,16 @@ include('inc/header.php');
 				
 					<?php if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
-        $_iduz = $_POST["iduz"];
-        $_imie = $_POST["imie"];
-        $_nazwisko = $_POST["nazwisko"];
-        $_aktywny = $_POST["aktywny"];
-        $_dataUrodzenia = $_POST["dataUrodzenia"];
-        $_telefonKontaktowy = $_POST["telefonKontaktowy"];
-        $_miejsceZamieszkania = $_POST["miejsceZamieszkania"];
-		$_typUzytkownika = $_POST["typUzytkownika"];
+					$iduz = $_POST["iduz"];
+					$imie = $_POST["imie"];
+					$nazwisko = $_POST["nazwisko"];
+					$aktywny = $_POST["aktywny"];
+					$dataUrodzenia = $_POST["dataUrodzenia"];
+					$telefonKontaktowy = $_POST["telefonKontaktowy"];
+					$miejsceZamieszkania = $_POST["miejsceZamieszkania"];
+					$typUzytkownika = $_POST["typUzytkownika"];
 
-					$user->dodajUzytkownika($_iduz,$_imie, $_nazwisko, $_dataUrodzenia, $_pesel, $_miejsceZamieszkania, $_telefonKontaktowy, $_typUzytkownika, $_aktywny);
+					$user->dodajUzytkownika($iduz,$imie, $nazwisko, $dataUrodzenia, $pesel, $miejsceZamieszkania, $telefonKontaktowy, $typUzytkownika, $aktywny);
 					}?>
 						<a href='uzytkownicy.php'><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></a>
 				</div>

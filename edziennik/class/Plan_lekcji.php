@@ -31,7 +31,8 @@ class Plan_lekcji {
 	 */
 	public function wyswietlPlan($idUz) {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
-
+		//wyswietlanie planu w zaleznosci od zalogowanego uzytkownika
+		//admin wszystkie
 		if ($_SESSION['usertype']=='admin'){
 			$sql = "SELECT idlekcji, datalekcji, przedmioty.nazwaprzedmiotu, klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko
 			FROM lekcje 
@@ -40,6 +41,7 @@ class Plan_lekcji {
 			INNER JOIN klasa ON klasa.idklasy=przedmioty.klasa_idklasy
 			ORDER BY datalekcji ASC";
 		}
+		//nauczyciel tylko jego lekcje
 		else if($_SESSION['usertype']=='nauczyciel'){
 			$sql = "SELECT idlekcji, datalekcji, przedmioty.nazwaprzedmiotu,  klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko
 			FROM lekcje 
@@ -49,8 +51,8 @@ class Plan_lekcji {
 			WHERE przedmioty.uzytkownicy_iduz='$idUz'
 			ORDER BY datalekcji ASC";
 		}
+		//uczen jego lekcje
 		else if($_SESSION['usertype']=='uczen'){
-
 			$sql = "SELECT idlekcji, datalekcji, przedmioty.nazwaprzedmiotu,  klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko
 			FROM lekcje 
 			INNER JOIN przedmioty ON lekcje.przedmioty_idprzedmiotu=przedmioty.idprzedmiotu
@@ -60,6 +62,7 @@ class Plan_lekcji {
 			WHERE uczniowie.uzytkownicy_iduz='$idUz'
 			ORDER BY datalekcji ASC";
 		}
+		//rodzic lekcje dziecka
 		else if($_SESSION['usertype']=='rodzic') {
 			$sql = "SELECT idlekcji, datalekcji, przedmioty.nazwaprzedmiotu,  klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko
 			FROM lekcje 
@@ -89,6 +92,7 @@ class Plan_lekcji {
 				<form method="post">
 				<button type="submit" name="'.$row["idlekcji"].'" class="btn btn-success btn-xs">Wybierz</button>
 				</form></th>';
+				//ustawienie zmiennej sesyjnej do zmiany lekcji
 				if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST[$row["idlekcji"]])){				
 					$_SESSION["idChange"] = $row["idlekcji"];
 					//echo '<meta http-equiv="Refresh" content="0;url=uzytkownicy.php">';

@@ -1,6 +1,5 @@
 <?php
 require_once('Uzytkownik.php');
-//use Uzytkownik;
 
 /**
  * @access public
@@ -8,9 +7,9 @@ require_once('Uzytkownik.php');
  */
 class Lista_uzytkownikow {
 	/**
-	 * @AttributeType U�ytkownik[]
+	 * @AttributeType Uzytkownik[]
 	 */
-	private $_lista;
+	private $lista;
 	/**
 	 * @AttributeType Uzytkownik
 	 * /**
@@ -18,13 +17,15 @@ class Lista_uzytkownikow {
 	 *  * /
 	 */
 
-	public function edytujUzytkownika($_iduz,$_imie, $_nazwisko, $_dataUrodzenia, $_pesel, $_miejsceZamieszkania, $_telefonKontaktowy, $_typUzytkownika, $_aktywny) {
+	public function edytujUzytkownika($iduz,$imie, $nazwisko, $dataUrodzenia, $pesel, $miejsceZamieszkania, $telefonKontaktowy, $typUzytkownika, $aktywny) {
+		//laczenie z baza danych
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
 	
-		$sql = "UPDATE uzytkownicy  SET iduz='$_iduz', imie='$_imie', nazwisko='$_nazwisko', dataurodzenia='$_dataUrodzenia', 
-		pesel='$_pesel', miejscezamieszkania='$_miejsceZamieszkania', telefonkontaktowy='$_telefonKontaktowy',typuzytkownika='$_typUzytkownika', aktywny='$_aktywny'
+		$sql = "UPDATE uzytkownicy  SET iduz='$iduz', imie='$imie', nazwisko='$nazwisko', dataurodzenia='$dataUrodzenia', 
+		pesel='$pesel', miejscezamieszkania='$miejsceZamieszkania', telefonkontaktowy='$telefonKontaktowy',typuzytkownika='$typUzytkownika', aktywny='$aktywny'
 		WHERE iduz='".$_SESSION["idChange"]."'"  ;
 
+		//obsluga bledow
 		if (mysqli_query($conn, $sql)) {
 			echo "<script>alert('Zapisano');</script>";
 			echo "<script>window.location.href='uzytkownicy.php';</script>";
@@ -37,24 +38,24 @@ class Lista_uzytkownikow {
 	mysqli_close($conn);
 	}
 
-
 	/**
 	 * @access public
 	 */
-	public function dodajUzytkownika($_iduz,$_imie, $_nazwisko, $_dataUrodzenia, $_pesel, $_miejsceZamieszkania, $_telefonKontaktowy, $_typUzytkownika, $_aktywny) {
+	//dodawanie uzytkownika do bazy
+	public function dodajUzytkownika($iduz,$imie, $nazwisko, $dataUrodzenia, $pesel, $miejsceZamieszkania, $telefonKontaktowy, $typUzytkownika, $aktywny) {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
 	
-			$sql = "INSERT INTO uzytkownicy (iduz, imie, nazwisko, dataurodzenia, pesel, miejscezamieszkania, telefonkontaktowy,typuzytkownika, aktywny) 
-			VALUES ('$_iduz','$_imie', '$_nazwisko', '$_dataUrodzenia', '$_pesel', '$_miejsceZamieszkania', '$_telefonKontaktowy', '$_typUzytkownika', '$_aktywny')";
+		$sql = "INSERT INTO uzytkownicy (iduz, imie, nazwisko, dataurodzenia, pesel, miejscezamieszkania, telefonkontaktowy,typuzytkownika, aktywny) 
+		VALUES ('$iduz','$imie', '$nazwisko', '$dataUrodzenia', '$pesel', '$miejsceZamieszkania', '$telefonKontaktowy', '$typUzytkownika', '$aktywny')";
 
-			if (mysqli_query($conn, $sql)) {
-				echo "<script>alert('Dodano');</script>";
-				echo "<script>window.location.href='uzytkownicy.php';</script>";
-				exit();
-			}
-			else{
-				echo "<script>alert('Niepoprawne dane');</script>";
-				echo "<script>window.location.href='dodaj_uzytkownika.php';</script>";
+		if (mysqli_query($conn, $sql)) {
+			echo "<script>alert('Dodano');</script>";
+			echo "<script>window.location.href='uzytkownicy.php';</script>";
+			exit();
+		}
+		else{
+			echo "<script>alert('Niepoprawne dane');</script>";
+			echo "<script>window.location.href='dodaj_uzytkownika.php';</script>";
 			}
 		mysqli_close($conn);
 		}
@@ -63,19 +64,26 @@ class Lista_uzytkownikow {
 	/**
 	 * @access public
 	 */
-	public function znajdzUzytkownika() {
-		//poco?
+	public function znajdzUzytkownika($idUz) {
+
+		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
+		$sql = "SELECT * FROM uzytkownicy";
+		$result = mysqli_query($conn, $sql);
+		$records = mysqli_num_rows($result);
+		$row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		//wyswietlanie
+		echo $row["imie"] . $row["nazwisko"];
 	}
 
-	public static function usunUzytkownika($_iduz) {
+	public static function usunUzytkownika($iduz) {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
-		$sql = "SELECT * FROM uczniowie, rodzice, przedmioty WHERE uczniowie.uzytkownicy_iduz='$_iduz' OR przedmioty.uzytkownicy_iduz='$_iduz' OR rodzice.uzytkownicy_iduz='$_iduz'" ; 
+		$sql = "SELECT * FROM uczniowie, rodzice, przedmioty WHERE uczniowie.uzytkownicy_iduz='$iduz' OR przedmioty.uzytkownicy_iduz='$iduz' OR rodzice.uzytkownicy_iduz='$iduz'" ; 
 		$result = mysqli_query($conn, $sql);
 		if ($result!=NULL){
 			echo "<script>alert('Uzytkownik przypisany, brak mozliwosci usuniecia. Zmien aktywnosc');</script>";
 		}
 		else{
-			$sql = "DELETE FROM uzytkownicy WHERE iduz='$_iduz'"; 
+			$sql = "DELETE FROM uzytkownicy WHERE iduz='$iduz'"; 
 
 			if (mysqli_query($conn, $sql)) {
 				echo "<script>alert('Usunieto');</script>";
@@ -87,18 +95,17 @@ class Lista_uzytkownikow {
 		
 	}
 
-
 	/**
 	 * @access public
 	 */
 	public function wyswietlListeUzytkownikow() {
-	
+	//laczenie z baza danych
 	$conn = mysqli_connect('localhost', 'root','', 'edziennik');
-
 	$sql = "SELECT iduz, imie, nazwisko, typUzytkownika, aktywny FROM uzytkownicy ORDER BY iduz ASC";
 	$result = mysqli_query($conn, $sql);
 	$records = mysqli_num_rows($result);
 
+	//wyswietlanie
 	if ($records > 0) {
 		$row = mysqli_fetch_all($result, MYSQLI_ASSOC);
 		$count = 1;
@@ -109,6 +116,7 @@ class Lista_uzytkownikow {
 			echo "<th>" . $row['nazwisko'] ."</th>";
 			echo "<th>" . $row['typUzytkownika'] ."</th>";
 			echo "<th>" ;
+			//aktywnosc tak nie
 			if( $row['aktywny']==1){
 				echo "tak";
 			}
@@ -116,6 +124,7 @@ class Lista_uzytkownikow {
 				echo "nie";
 			}
 			echo "</th>";
+			//jesli admin - mozliwosc wyboru uzytkownika do edycji
 			if($_SESSION['usertype']=='admin'){
 			echo '<th>
 			<form action="uzytkownicy.php" method="post">
@@ -127,15 +136,15 @@ class Lista_uzytkownikow {
 				echo '<meta http-equiv="Refresh" content="0;url=uzytkownicy.php">';
 			}
 			echo "</tr>";
+			}
 		}
-
+		}
 	}
-
-	}
-}
+	
 	/**
 	 * @access public
 	 */
+	//zmiana aktywnosci uzytkownika w bazie
 	public function zmienAktywnosc() {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
 		if($_SESSION["idChangeActivity"]!=0){
@@ -150,6 +159,6 @@ class Lista_uzytkownikow {
 		  } else {
 			echo "Error przy zmienianiu aktywnosci: " . $conn->error;
 		  }
+		}
 	}
-}
 ?>

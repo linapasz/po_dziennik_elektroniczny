@@ -3,12 +3,15 @@ include('class/Plan_lekcji.php');
 include('class/School.php');
 
 $idLekcji = $_SESSION["idChange"];
+
 $sql = "SELECT datalekcji, przedmioty.nazwaprzedmiotu, przedmioty.idprzedmiotu, klasa.nazwaklasy, klasa.idklasy, uzytkownicy.imie, uzytkownicy.nazwisko, uzytkownicy.iduz, tematlekcji
 FROM lekcje 
 INNER JOIN przedmioty ON lekcje.przedmioty_idprzedmiotu=przedmioty.idprzedmiotu
 INNER JOIN uzytkownicy ON przedmioty.uzytkownicy_iduz = uzytkownicy.iduz
 INNER JOIN klasa ON klasa.idklasy=przedmioty.klasa_idklasy
 WHERE idlekcji='".$idLekcji."'";
+
+//laczenie z baza danych
 $conn = mysqli_connect('localhost', 'root','', 'edziennik');
 $result = mysqli_query($conn, $sql);
 $records = mysqli_num_rows($result);
@@ -21,6 +24,7 @@ $nazwaKlasy = $row['nazwaklasy'];
 $idKlasy = $row['idklasy'];
 $nazwiskoNauczyciela = $row['nazwisko'];
 $imieNauczyciela = $row['imie'];
+
 $school = new School();
 $school->loginStatus();
 $plan = new Plan_Lekcji();

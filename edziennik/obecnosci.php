@@ -3,11 +3,13 @@ include('class/School.php');
 include('class/Obecnosc.php');
 include('class/Plan_lekcji.php');
 include('inc/header.php');
+
 $school = new School();
 $school->loginStatus();
 $obecnosc= new Obecnosc();
 $plan = new Plan_lekcji();
 ?>
+
 <title>eDziennik</title>
 <?php include('include_files.php');?>
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
@@ -34,12 +36,13 @@ $plan = new Plan_lekcji();
 								</thead>
 								</table>
 							</div>
-						<?php 
+							<?php 
+							//w przypadku nacisniecia przycisku obecnosci przesylanie danych i przejscie do innego pliku
 								if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["obecnosc"]))
 							   {
 								echo '<meta http-equiv="Refresh" content="0;url=obecnosci_sprawdz.php">';
 								}
-						 ?>
+						 	?>
 					</div>
 				</div>
 				<table id="classList" class="table table-bordered table-striped">
@@ -54,6 +57,7 @@ $plan = new Plan_lekcji();
 						</tr></thead>	
 
 							<?php 
+							//pobieranie planu z bazy danych i wyswietlenie
 							$plan->wyswietlPlan($_SESSION["userid"]);
 							?>			
 						</tr>

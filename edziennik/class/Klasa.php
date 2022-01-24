@@ -31,9 +31,9 @@ class Klasa {
 	 */
 	private $przedmioty;
 	/**
-	 * @AttributeType Ucze�
+	 * @AttributeType Uczen
 	 * /**
-	 *  * @AssociationType Ucze�
+	 *  * @AssociationType Uczen
 	 *  * /
 	 */
 
