@@ -1,8 +1,4 @@
 <?php
-//require_once(realpath(dirname(__FILE__)) . '/Lekcja.php');
-
-//use Lekcja;
-
 /**
  * @access public
  * @author karpasz1
@@ -47,7 +43,6 @@ class Obecnosc {
 	 * @access public
 	 */
 	public function nieobecny($idUz, $idLekcji) {
-		echo 1;
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
 		$sql = "SELECT * FROM obecnosci WHERE uczniowie_uzytkownicy_iduz='$idUz' AND lekcje_idlekcji='$idLekcji'";
 		$result=mysqli_query($conn, $sql);
@@ -74,6 +69,7 @@ class Obecnosc {
 	/**
 	 * @access public
 	 */
+	//usprawiedliwienie nieobecnosci pojedynczego ucznia
 	public function usprawiedliw($idUz,$idLekcji,$obecnosc) {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
 		if($obecnosc=0){
@@ -92,7 +88,8 @@ class Obecnosc {
 	 */
 	public function wyswietlObecnosc($idLekcji) {
 		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
-
+		//obecnosci wyswietlane w zaleznosci od rodzaju uzytkownika
+		//dla ucznia tylko jego
 		 if($_SESSION['usertype']=='uczen'){
 			$sql = "SELECT obecnosci.idobecnosci,obecnosci.uczniowie_uzytkownicy_iduz, obecnosci.obecnosc, uzytkownicy.imie, uzytkownicy.nazwisko, uzytkownicy.iduz
 			FROM obecnosci
@@ -101,6 +98,7 @@ class Obecnosc {
 			WHERE obecnosci.lekcje_idlekcji = '$idLekcji' AND obecnosci.uczniowie_uzytkownicy_iduz='".$_SESSION["userid"]."'
 			ORDER BY uzytkownicy.nazwisko ASC";
 		}
+		//dla rodzica obecnosci jego dziecka
 		else if($_SESSION['usertype']=='rodzic') {
 			$sql = "SELECT obecnosci.idobecnosci,obecnosci.uczniowie_uzytkownicy_iduz, obecnosci.obecnosc, uzytkownicy.imie, uzytkownicy.nazwisko, uzytkownicy.iduz
 			FROM obecnosci
@@ -110,6 +108,7 @@ class Obecnosc {
 			WHERE obecnosci.lekcje_idlekcji = '$idLekcji' AND rodzice.iduz='".$_SESSION["userid"]."'
 			ORDER BY uzytkownicy.nazwisko ASC";
 		}
+		//w innym przypadku wszystkie
 		else {
 			$sql = "SELECT obecnosci.idobecnosci,obecnosci.uczniowie_uzytkownicy_iduz, obecnosci.obecnosc, uzytkownicy.imie, uzytkownicy.nazwisko, uzytkownicy.iduz
 			FROM obecnosci
@@ -130,16 +129,19 @@ class Obecnosc {
 				echo "<th>" . $row['imie'] ."</th>";
 				echo "<th>" . $row['nazwisko'] ."</th>";
 				echo "<th>" . $row['obecnosc'] ."</th>";
+
 				if($_SESSION['usertype']=='rodzic' ){
 					echo '<th><form method="post">
 					<button type="submit" name="'.$row['uczniowie_uzytkownicy_iduz'].'" class="btn btn-success btn-xs">Usprawiedliw</button>
 					</form></th>';
+					//jesli wybrany przycisk usprawiedliwienia przez rodzica
 					if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST[$row['uczniowie_uzytkownicy_iduz']])){				
 						Obecnosc::usprawiedliw($idUz,$idLekcji,$row['obecnosc']);
 						echo '<meta http-equiv="Refresh" content="0;url=obecnosci_sprawdz.php">';
 					}
 					
 				}
+				//admin i nauczyciel z mozliwoscia wpisywania obecnosci
 				else if ($_SESSION['usertype']!='uczen' ){
 					echo '<th><form method="post">
 					<button type="submit" name="'.$row['uczniowie_uzytkownicy_iduz'].'" class="btn btn-success btn-xs">Nieobecny</button>
@@ -148,7 +150,6 @@ class Obecnosc {
 						Obecnosc::nieobecny($idUz,$idLekcji);
 						echo '<meta http-equiv="Refresh" content="0;url=obecnosci_sprawdz.php">';
 					}
-					
 					echo '<th><form method="get">
 					<button type="submit" name="'.$row['iduz'].'" class="btn btn-success btn-xs">Obecny</button>
 					</form></th>';

@@ -1,7 +1,9 @@
 <?php 
 include('class/Skrzynka_odbiorcza.php');
 include('class/School.php');
+
 date_default_timezone_set("Europe/Warsaw");
+
 $skrzynka = new Skrzynka_odbiorcza();
 $school = new School();
 $school->loginStatus();
@@ -12,6 +14,7 @@ $tresc='';
 $idOdbiorcy='';
 include('inc/header.php');
 ?>
+
 <title>eDziennik</title>
 <?php include('include_files.php');?>
 <?php include('inc/container.php');?>
@@ -47,7 +50,10 @@ include('inc/header.php');
 							<div class="modal-footer">
 							<th><form action="poczta.php" method="POST"><button type="submit" name="send" id="send" class="btn btn-info"> Wyslij</button></form></th>
 							</form>
-							<?php if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["send"])){
+
+							<?php 
+							//w przypadku wyslania wywolanie funkcji nowaWiadomosc
+							if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["send"])){
 							$temat=$_POST['temat'];
 							$tresc=$_POST['tresc'];
 							$idOdbiorcy=$_POST['idodbiorcy'];

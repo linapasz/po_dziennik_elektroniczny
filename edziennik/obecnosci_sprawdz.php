@@ -3,11 +3,13 @@ include('class/School.php');
 include('class/Obecnosc.php');
 include('class/Plan_lekcji.php');
 include('inc/header.php');
+
 $school = new School();
 $school->loginStatus();
 $obecnosc= new Obecnosc();
 $plan = new Plan_lekcji();
 ?>
+
 <title>eDziennik</title>
 <?php include('include_files.php');?>
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
@@ -49,11 +51,13 @@ $plan = new Plan_lekcji();
 						<th>Obecnosc</th>
 						<th></th>	
 						<th></th>										
-						</tr></thead>	
+						</tr></thead>
 
-							<?php 
-							$obecnosc->wyswietlObecnosc($_SESSION['idChange']);
-							?>			
+						<?php 
+						//pobieranie danych z bazy i wyswietlanie
+						$obecnosc->wyswietlObecnosc($_SESSION['idChange']);
+						?>	
+								
 						</tr>
 					</thead>
 				</table>

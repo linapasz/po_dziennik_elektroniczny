@@ -1,6 +1,7 @@
 <?php 
 include('class/Dzienniczek.php');
 include('class/School.php');
+
 $idOceny=$_SESSION["idOceny"];
 $sql = "SELECT * FROM ocenyczastkowe WHERE idoceny='$idOceny'";
 $conn = mysqli_connect('localhost', 'root','', 'edziennik');
@@ -15,6 +16,7 @@ $idUcznia=$row['uczniowie_iduz'];
 $school = new School();
 $school->loginStatus();
 $dzienniczek = new Dzienniczek();
+
 include('inc/header.php');
 ?>
 <title>eDziennik</title>

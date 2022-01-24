@@ -34,8 +34,21 @@ class Uczen extends Uzytkownik {
 	/**
 	 * @access public
 	 */
-	public function zmienKlase() {
-		// Not yet implemented
+	public function zmienKlase($idUz, $klasaUcznia) {
+		$conn = mysqli_connect('localhost', 'root','', 'edziennik');
+
+		$sql = "UPDATE uczniowie  SET klasa="$klasaUcznia" WHERE iduz='$idUz'"  ;
+		//obsluga bledow
+		if (mysqli_query($conn, $sql)) {
+			echo "<script>alert('Zapisano');</script>";
+			echo "<script>window.location.href='uzytkownicy.php';</script>";
+			exit();
+		}
+		else{
+			echo "<script>alert('Niepoprawne dane');</script>";
+			echo "<script>window.location.href='edytuj_uzytkownika.php';</script>";
+		}
+	mysqli_close($conn);
 	}
 }
 ?>

@@ -2,21 +2,21 @@
 include('class/Lista_uzytkownikow.php');
 include('class/School.php');
 $newUser = new Uzytkownik();
-$_iduz=$_SESSION["idChange"];
+$iduz=$_SESSION["idChange"];
 
-$sql = "SELECT * FROM uzytkownicy WHERE iduz='".$_iduz."'";
+$sql = "SELECT * FROM uzytkownicy WHERE iduz='".$iduz."'";
 $conn = mysqli_connect('localhost', 'root','', 'edziennik');
 $result = mysqli_query($conn, $sql);
 $records = mysqli_num_rows($result);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-$_imie = $row['imie'];
-$_nazwisko=  $row['nazwisko'];
-$_dataUrodzenia=  $row['dataurodzenia'];
-$_pesel= $row['pesel'];
-$_miejsceZamieszkania= $row['miejscezamieszkania'];
-$_telefonKontaktowy= $row['telefonkontaktowy'];
-$_typUzytkownika= $row['typuzytkownika'];
-$_aktywny= $row['aktywny'];
+$imie = $row['imie'];
+$nazwisko=  $row['nazwisko'];
+$dataUrodzenia=  $row['dataurodzenia'];
+$pesel= $row['pesel'];
+$miejsceZamieszkania= $row['miejscezamieszkania'];
+$telefonKontaktowy= $row['telefonkontaktowy'];
+$typUzytkownika= $row['typuzytkownika'];
+$aktywny= $row['aktywny'];
 $school = new School();
 $school->loginStatus();
 $user = new Lista_uzytkownikow();
@@ -38,19 +38,19 @@ include('inc/header.php');
 				</div>
 				<div class="modal-body">
 				<div class="form-group">
-						<label for="firstname" class="control-label">Id <?php echo $_iduz ?></label>		
+						<label for="firstname" class="control-label">Id <?php echo $iduz ?></label>		
 					</div>	
 					<div class="form-group">
 						<label for="firstname" class="control-label">Imie</label>
-						<input type="text" class="form-control" id="imie" name="imie" placeholder="<?php echo $_imie; ?>" value="<?=$_imie; ?>" required>		
+						<input type="text" class="form-control" id="imie" name="imie" placeholder="<?php echo $imie; ?>" value="<?=$imie; ?>" required>		
 					</div>	
 					<div class="form-group">
 						<label for="firstname" class="control-label">Nazwisko</label>
-						<input type="text" class="form-control" id="nazwisko" name="nazwisko" placeholder="<?php echo $_nazwisko; ?>" value="<?= $_nazwisko; ?>"required>				
+						<input type="text" class="form-control" id="nazwisko" name="nazwisko" placeholder="<?php echo $nazwisko; ?>" value="<?= $nazwisko; ?>"required>				
 					</div>	
 					<div class="form-group">
 						<label for="mname" class="control-label">Aktywnosc</label>	
-						<select name="aktywny" id="aktywny" class="form-control"  value="<?=$_aktywny; ?>"required>
+						<select name="aktywny" id="aktywny" class="form-control"  value="<?=$aktywny; ?>"required>
 							<option value="">Wybierz</option>
 							<option value="1">aktywny</option>
 							<option value="0">nieaktywny</option>
@@ -59,23 +59,23 @@ include('inc/header.php');
 					</div>
 					<div class="form-group">
 						<label for="email" class="control-label">Data urodzenia</label>							
-						<input type="text" class="form-control"  id="dataUrodzenia" name="dataUrodzenia" placeholder="<?php echo $_dataUrodzenia; ?>" value="<?=$_dataUrodzenia; ?>">					
+						<input type="text" class="form-control"  id="dataUrodzenia" name="dataUrodzenia" placeholder="<?php echo $dataUrodzenia; ?>" value="<?=$dataUrodzenia; ?>">					
 					</div>	
 					<div class="form-group">
 						<label for="email" class="control-label">Pesel</label>							
-						<input type="text" class="form-control"  id="pesel" name="pesel" placeholder="<?php echo $_pesel; ?>" value="<?= $_pesel; ?>">							
+						<input type="text" class="form-control"  id="pesel" name="pesel" placeholder="<?php echo $pesel; ?>" value="<?= $pesel; ?>">							
 					</div>	
 					<div class="form-group">
 						<label for="mobile" class="control-label">Telefon</label>							
-						<input type="text" class="form-control" id="telefonKontaktowy" name="telefonKontaktowy" placeholder="<?php echo $_telefonKontaktowy; ?>" value="<?= $_telefonKontaktowy; ?>">						
+						<input type="text" class="form-control" id="telefonKontaktowy" name="telefonKontaktowy" placeholder="<?php echo $telefonKontaktowy; ?>" value="<?= $telefonKontaktowy; ?>">						
 					</div>		
 					<div class="form-group">
 						<label for="address" class="control-label">Adres</label>							
-						<input type="text" class="form-control" id="miejsceZamieszkania" name="miejsceZamieszkania" placeholder="<?php echo $_miejsceZamieszkania; ?>" value="<?= $_miejsceZamieszkania; ?>">							
+						<input type="text" class="form-control" id="miejsceZamieszkania" name="miejsceZamieszkania" placeholder="<?php echo $miejsceZamieszkania; ?>" value="<?= $miejsceZamieszkania; ?>">							
 					</div>
 					<div class="form-group">
 						<label for="mname" class="control-label">Typ uzytkownika</label>	
-						<select name="typUzytkownika" id="typUzytkownika" class="form-control"  value="<?= $_typUzytkownika; ?>"required>
+						<select name="typUzytkownika" id="typUzytkownika" class="form-control"  value="<?= $typUzytkownika; ?>"required>
 							<option value="">Wybierz</option>
 							<option value="admin">administrator</option>
 							<option value="nauczyciel">nauczyciel</option>
@@ -91,14 +91,14 @@ include('inc/header.php');
 				
 					<?php if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
-        $_imie = $_POST["imie"];
-        $_nazwisko = $_POST["nazwisko"];
-        $_aktywny = $_POST["aktywny"];
-        $_dataUrodzenia = $_POST["dataUrodzenia"];
-        $_telefonKontaktowy = $_POST["telefonKontaktowy"];
-        $_miejsceZamieszkania = $_POST["miejsceZamieszkania"];
-		$_typUzytkownika = $_POST["typUzytkownika"];
-					$user->edytujUzytkownika($_iduz,$_imie, $_nazwisko, $_dataUrodzenia, $_pesel, $_miejsceZamieszkania, $_telefonKontaktowy, $_typUzytkownika, $_aktywny);
+					$imie = $_POST["imie"];
+					$nazwisko = $_POST["nazwisko"];
+					$aktywny = $_POST["aktywny"];
+					$dataUrodzenia = $_POST["dataUrodzenia"];
+					$telefonKontaktowy = $_POST["telefonKontaktowy"];
+					$miejsceZamieszkania = $_POST["miejsceZamieszkania"];
+					$typUzytkownika = $_POST["typUzytkownika"];
+					$user->edytujUzytkownika($iduz,$imie, $nazwisko, $dataUrodzenia, $pesel, $miejsceZamieszkania, $telefonKontaktowy, $typUzytkownika, $aktywny);
 					}?>
 						<a href='uzytkownicy.php'><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></a>
 				</div>

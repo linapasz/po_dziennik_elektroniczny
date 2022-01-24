@@ -1,7 +1,5 @@
 <?php
-//use Przedmiot;
-//use Obecnosc;
-
+include("Obecnosc.php");
 /**
  * @access public
  * @author karpasz1
@@ -19,6 +17,7 @@ class Lekcja {
 	 * @AttributeType time_t
 	 */
 
+
 	/**
 	 * @access public
 	 */
@@ -29,10 +28,10 @@ class Lekcja {
 		WHERE idlekcji='".$_SESSION["idlekcji"]."'"  ;
 
 		if (mysqli_query($conn, $sql)) {
-			
+			echo "<script>alert('Udane wyszukiwanie');</script>";
 		}
 		else{
-			echo "<script>alert('Błąd lekcji');</script>";
+			echo "<script>alert('Blad lekcji');</script>";
 			echo "<script>window.location.href='plan_lekcji.php';</script>";
 		}
 	mysqli_close($conn);
@@ -54,7 +53,7 @@ class Lekcja {
 		}
 		else{
 			echo "<script>alert('Niepoprawne dane');</script>";
-			echo "<script>window.location.href='editLesson.php';</script>";
+			echo "<script>window.location.href='edytuj_lekcje.php';</script>";
 		}
 	mysqli_close($conn);
 	}
@@ -63,7 +62,17 @@ class Lekcja {
 	 * @access public
 	 */
 	public function sprawdzObecnosc() {
-		// Not yet implemented
+		$obecnosc = new Obecnosc();
+		$result = $obecnosc->wyswietlObecnosc();
+		if ($result) {
+			echo "<script>alert('Zapisano');</script>";
+			exit();
+		}
+		else{
+			echo "<script>alert(Blad zapisu danych');</script>";
+		}
+
 	}
+
 }
 ?>

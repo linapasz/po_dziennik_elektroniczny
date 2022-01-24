@@ -1,17 +1,8 @@
-Projektowanie bazy danych w Oracle SQL Developer Data Modeler
-Dodanie do klasy 'Przedmioty' zmiennej 'klasa' a usunięcie 'uczniowie'.
-Usunięcie metod dodajUcznia() i usunUcznia()
-Usunięcie z klasy 'Lekcja' zmiennej 'czas trwania' jako zbędnego elementu
-Usunięcie znajdzuzytkownika() z Lista_uzytkownikow, ponieważ okazała się zbędna 
+﻿Projektowanie bazy danych w Oracle SQL Developer Data Modeler
+I wygenerowanie db
 
-Z klasy wiadomosc usunąć anuluj(), dodajodbiorce(), podajtresc(), bo przy naszej implementacji są to funkcje zbędne.
 Z klady Przedmiot usunac dodajUcznia(), usunUcznia(), ponieważ podczas etapu projektowania przeoczyliśmy fakt, że są to funkcje zbędne, ponieważ do przedmiotu dopisywana jest klasa, a nie pojedyńczy uczniowie.
 
-Zostalo do zaimplementowania (izi, zrobię w wolnej chwili):
-Uczen::zmienKlase();    //zrobione
-Przedmiot::zmienProwadzacego()  //zrobione
-
-Trzeba kod ogarnąć, żeby miał ręce i nogi - czyli jednakowe wcięcia i w ogóle, bo ja jak siedziałam po nocy, to było mi już wszystko jedno jak to wygląda xD
 
 Nazewnictwo jest w miarę jednolite:
 - zmienne/pliki wszystko po polsku
@@ -23,7 +14,4 @@ Nazewnictwo jest w miarę jednolite:
 Dzięki takiemu oznaczeniu wiadomo co jest czym na pierwszy rzut oka. 
 
 Dokumentacja:
-powrzucamy dużo komentarzy do kodu i będzie git - do tych oczywistych możesz ty, resztę ja podpiszę
-Poza tym to nie wiem co się pisze w dokumentacji. Powierzam to Tobie xD
-
-GITHUB - zrób jakiegoś brancha, pozmieniaj coś w kodzie i podosyłaj, żeby było, że używaliśmy tego gitaXD
+kody w plikach

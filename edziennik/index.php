@@ -25,11 +25,7 @@ include('inc/header.php');
 					<div style="margin-bottom: 25px" class="input-group">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 						<input type="text" class="form-control" id="id" name="id" placeholder="id" required>                                        
-					</div>                                
-					<div style="margin-bottom: 25px" class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input type="password" class="form-control" id="haslo" name="haslo" placeholder="haslo" required>
-					</div>
+					</div>                               
 					<div style="margin-top:10px" class="form-group">                               
 						<div class="col-sm-12 controls">
 						  <input type="submit" name="login" value="Zaloguj" class="btn btn-success">						  
@@ -37,8 +33,7 @@ include('inc/header.php');
 					</div>	
 					<div style="margin-top:10px" class="form-group">                               
 						<div class="col-sm-12 controls">
-						ID: admin1, uczen1, rodzi1, naucz1<br>
-						password:123	<br><br>									
+						ID: admin1, uczen1, rodzi1, naucz1<br><br><br>									
 						</div>						
 					</div>	
 				</form>   

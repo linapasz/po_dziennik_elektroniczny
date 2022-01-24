@@ -38,8 +38,8 @@ include('inc/header.php');
 					<tr>
 					<?php	$skrzynka->wyswietlSkrzynke(); ?>
 					</tr>
+			</div>
 	</div>
-</div>
 </div>	
 
 <?php include('inc/footer.php');?>

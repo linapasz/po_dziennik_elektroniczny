@@ -29,7 +29,9 @@ include('inc/header.php');
 								<table>
 								<thead>
 									<tr>
-									<?php if ($_SESSION['usertype']=='admin'){
+									<?php 
+									//w zaleznosci od uzytkownika wyswietlenie odpowiednich przyciskow
+									if ($_SESSION['usertype']=='admin'){
 											echo '<th><a href ="dodaj_lekcje.php"><button type="button" name="add" id="addLesson" class="btn btn-success btn-xs">Dodaj lekcje</button></a></th>
 											<th><form action="plan_lekcji.php" method="POST"><button type="submit" name="delete" id="delete" class="btn btn-success btn-xs">	Usun lekcje</button></th></form>
 											<th><a href ="edytuj_lekcje.php"><button type="button" name="edit" id="editLesson" class="btn btn-success btn-xs">Edytuj lekcje</button></a></th>';
@@ -46,15 +48,17 @@ include('inc/header.php');
 								</thead>
 								</table>
 							</div>
-						<?php if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete"]))
-							   {
+							
+						<?php 
+						//sprawdzenie ktory przycisk nacisniety
+						if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete"])){
+							$plan->usunLekcje($_SESSION["idChange"]);
+							}
 
-								$plan->usunLekcje($_SESSION["idChange"]);
-								}
-								if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["lekcja"]))
-							   {
-								$przedmiot->wyswietlSzczegolyPrzedmiotu($_SESSION["idChange"]);
-								}
+						if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["lekcja"])){
+							$przedmiot->wyswietlSzczegolyPrzedmiotu($_SESSION["idChange"]);
+							}
+							
 						 ?>
 					</div>
 				</div>

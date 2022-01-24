@@ -27,19 +27,20 @@ include('inc/header.php');
 						<table>
 								<thead>
 									<tr>
-									<?php if ($_SESSION['usertype']=='admin'){
-											echo '	<th><a href ="dodaj_uzytkownika.php"><button type="button" name="add" id="addUser" class="btn btn-success btn-xs">Dodaj uzytkownika</button></a></th>
-											<th><a href ="edytuj_uzytkownika.php"><button type="button" name="edit" id="editUser" class="btn btn-success btn-xs">Edytuj uzytkownika</button></a></th>
-											<th><form action="uzytkownicy.php" method="POST"><button type="submit" name="delete" id="delete" class="btn btn-success btn-xs">
-												Usun uzytkownika</button></tr></form></th>';
+									<?php 
+									//wyswietlenie przyciskow do edycji w przypadku gdy uzytkownik to admin
+									if ($_SESSION['usertype']=='admin'){
+										echo '	<th><a href ="dodaj_uzytkownika.php"><button type="button" name="add" id="addUser" class="btn btn-success btn-xs">Dodaj uzytkownika</button></a></th>
+										<th><a href ="edytuj_uzytkownika.php"><button type="button" name="edit" id="editUser" class="btn btn-success btn-xs">Edytuj uzytkownika</button></a></th>
+										<th><form action="uzytkownicy.php" method="POST"><button type="submit" name="delete" id="delete" class="btn btn-success btn-xs">
+											Usun uzytkownika</button></tr></form></th>';
 									}
 									?>
 									</tr>
 								</thead>
 								</table>
 						</div>
-								<?php if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete"]))
-									{
+								<?php if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST["delete"])){
 										Lista_Uzytkownikow::usunUzytkownika($_SESSION["idChange"]);
 										echo '<meta http-equiv="Refresh" content="0;url=uzytkownicy.php">';
 									}

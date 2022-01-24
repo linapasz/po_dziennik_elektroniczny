@@ -2,6 +2,7 @@
 include('class/Dzienniczek.php');
 include('class/School.php');
 
+//polaczenie z baza
 $idOceny= $_SESSION["idOceny"];
 $sql = "SELECT ocenyczastkowe.idoceny, ocenyczastkowe.wartoscoceny, ocenyczastkowe.wagaoceny, ocenyczastkowe.datawpisania, przedmioty.nazwaprzedmiotu, klasa.nazwaklasy, uzytkownicy.imie, uzytkownicy.nazwisko
 FROM ocenyczastkowe
@@ -9,10 +10,12 @@ INNER JOIN uzytkownicy ON uzytkownicy.iduz=ocenyczastkowe.idnauczyciela
 INNER JOIN przedmioty ON przedmioty.uzytkownicy_iduz=ocenyczastkowe.idnauczyciela
 INNER JOIN klasa ON klasa.idklasy=przedmioty.klasa_idklasy
 WHERE ocenyczastkowe.idoceny=$idOceny";
+
 $conn = mysqli_connect('localhost', 'root','', 'edziennik');
 $result = mysqli_query($conn, $sql);
 $records = mysqli_num_rows($result);
 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
 $nazwaPrzedmiotu = $row['nazwaprzedmiotu'];
 $nazwaKlasy = $row['nazwaklasy'];
 $wartoscOceny = $row['wartoscoceny'];
